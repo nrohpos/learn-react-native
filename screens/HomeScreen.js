@@ -5,7 +5,7 @@ import NavOptions from "../components/NavOptions";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import { GOOGLE_MAPS_APIKEY } from "@env";
 import { useDispatch } from "react-redux";
-import {setOrigin , setDestination} from "../slices/navSlice"
+import { setOrigin, setDestination } from "../slices/navSlice";
 
 const HomeScreen = () => {
   const dispatch = useDispatch();
@@ -19,7 +19,7 @@ const HomeScreen = () => {
             resizeMode: "contain",
           }}
           source={{
-            uri: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png",
+            uri: "https://w7.pngwing.com/pngs/636/735/png-transparent-logo-uber-brand-design-text-logo-engineering-thumbnail.png",
           }}
         />
         <GooglePlacesAutocomplete
@@ -27,29 +27,32 @@ const HomeScreen = () => {
           placeholder="Where From?"
           debounce={400}
           fou
-          styles = {{
-            container:{
-              flex : 0,
+          styles={{
+            container: {
+              flex: 0,
             },
-            textInput :{
-              fontSize: 20
-            }
+            textInput: {
+              fontSize: 20,
+            },
           }}
           enablePoweredByContainer={false}
           query={{
-            key:GOOGLE_MAPS_APIKEY,
-            language:'en'
+            key: GOOGLE_MAPS_APIKEY,
+            language: "en",
           }}
-          onPress= {(data , details= null)=>{
-           dispatch(setOrigin({
-            location: details.geometry.location,description:data.description
-           }));
-           dispatch(setDestination(null))
+          onPress={(data, details = null) => {
+            dispatch(
+              setOrigin({
+                location: details.geometry.location,
+                description: data.description,
+              })
+            );
+            dispatch(setDestination(null));
           }}
           fetchDetails={true}
-          onFail= { error => console.error(error)}
+          onFail={(error) => console.error(error)}
         />
-        <NavOptions/>
+        <NavOptions />
       </View>
     </SafeAreaView>
   );
@@ -58,4 +61,3 @@ const HomeScreen = () => {
 export default HomeScreen;
 
 const styles = StyleSheet.create({});
- 

@@ -10,9 +10,12 @@ import React from "react";
 import tw from "twrnc";
 import { Icon } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
+import { useSelector } from "react-redux";
+import { selectOrigin } from "../slices/navSlice";
 
 const NavOptions = () => {
   const navigation = useNavigation();
+  const origin = useSelector(selectOrigin);
   return (
     <FlatList
       data={data}
@@ -21,8 +24,11 @@ const NavOptions = () => {
       showsVerticalScrollIndicator={false}
       keyExtractor={(item) => item.id}
       renderItem={({ item }) => (
-        <TouchableOpacity style={tw`p-2 pl-6 pb-8 pt-4 bg-gray-200 m-2 w-40`} onPress= {() => navigation.navigate(item.screen)}>
-          <View>
+        <TouchableOpacity style={tw`p-2 pl-6 pb-8 pt-4 bg-gray-200 m-2 w-40`} 
+        onPress= {() =>  navigation.navigate(item.screen)}
+        disabled={!origin}
+        >
+          <View style= {tw`${!origin && "opacity-20"}`}>
             <Image
               style={{
                 width: 120,
